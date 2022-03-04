@@ -3,8 +3,9 @@ const express = require('express')
 const cors = require('cors')
 
 const routeRoot = require('./api/routes/index')
+const routeUsers = require('./api/routes/users')
 
-require('./database/indexDB')
+// require('./database/indexDB')
 
 const app = express()
 app.use(cors())
@@ -12,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(routeRoot)
+app.use(routeUsers)
 
 app.listen(3000)
 
