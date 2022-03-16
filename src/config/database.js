@@ -1,13 +1,13 @@
-// fazer as alterações dessas configurações
+require('dotenv/config')
 
-/* module.exports = {
-    host: '172.16.90.10',
+module.exports = {
+    host: process.env.HOST,
     dialect: 'mysql',
-    username: 'remoto',
-    password: 'Bruno10*',
-    database: 'francaconectada',
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: 'test01',
     define: {
         timestamps: true,
         underscored: true
     }
-} */
+}

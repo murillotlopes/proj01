@@ -3,8 +3,9 @@ const Users = require('../models/usersModels')
 
 module.exports = {
     async index(req, res) {
+        
         const users = await Users.findAll()
-        return res.json(users)
+        return res.json({users})
     },
 
     async store(req, res) {
@@ -17,4 +18,6 @@ module.exports = {
             user
         })
     }
+
+    
 }

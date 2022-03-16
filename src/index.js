@@ -2,8 +2,10 @@
 const express = require('express')
 const cors = require('cors')
 
-const routeRoot = require('./api/routes/index')
-const routeUsers = require('./api/routes/users')
+//const routeRoot = require('./api/routes/index')
+const routeUsers = require('./api/routes/usersRoutes')
+const routeFuncionarios = require('./api/routes/funcionariosRoutes')
+const routeEmpresas = require('./api/routes/empresasRoutes')
 
 // require('./database/indexDB')
 
@@ -12,10 +14,14 @@ app.use(cors())
 
 app.use(express.json())
 
-app.use(routeRoot)
+//app.use(routeRoot)
 app.use(routeUsers)
+app.use(routeFuncionarios)
+app.use(routeEmpresas)
 
-app.listen(3000)
+app.listen(3000, function() {
+    console.log('Rodando na porta 3000')
+})
 
 
 
