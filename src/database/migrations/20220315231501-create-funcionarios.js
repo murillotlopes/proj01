@@ -9,6 +9,13 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
+      empresa_id: {
+        type: Sequelize.INTERGER,
+        allowNull: false,
+        references: {model: 'empresas', key: 'id'},
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
       fun_nome: {
         allowNull: false,
         type: Sequelize.STRING(60)
