@@ -4,6 +4,9 @@ const dbConfig = require('../config/database')
 const conexao = new Sequelize(dbConfig)
 
 const root = require('../api/models/index')
+const empresas = require('../api/models/empresasModels')
+const funcionarios = require('../api/models/funcionariosModels')
+const users = require('../api/models/usersModels')
 
 try{
     conexao.authenticate()
@@ -14,5 +17,11 @@ try{
 }
 
 root.init(conexao)
+empresas.init(conexao)
+funcionarios.init(conexao)
+users.init(conexao)
+
+empresas.associate(conexao.models)
+funcionarios.associate(conexao.models)
 
 module.exports = conexao

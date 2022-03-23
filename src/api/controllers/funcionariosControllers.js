@@ -1,4 +1,5 @@
 const Funcionarios = require('../models/funcionariosModels')
+const Empresas = require('../models/empresasModels')
 
 module.exports = {
     async index(req, res) {
@@ -7,9 +8,19 @@ module.exports = {
     },
 
     async create(req, res){
+        const { empresa_id } = req.params
         const {fun_nome, fun_password, emp_email} = req.body
 
-        const funcionario = await Funcionarios.create(fun_nome, fun_password, emp_email)
+        console.log('Parametros esperado: ' + empresa_id)
+        console.log('Dados: ' + req.body)
+
+        const empresa = await Empresas.findByPk(empresa_id)
+
+        if(!empresa){
+            return res.status(400).json({error: 'empresa não encontrada'})
+        }
+
+        const funcionario = await Funcionarios.create(fun_nome, fun_password, emp_email, empresa_id)
 
         return res.status(200).send({
             status: 1,

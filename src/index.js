@@ -7,7 +7,7 @@ const routeUsers = require('./api/routes/usersRoutes')
 const routeFuncionarios = require('./api/routes/funcionariosRoutes')
 const routeEmpresas = require('./api/routes/empresasRoutes')
 
-// require('./database/indexDB')
+require('./database/indexDB')
 
 const app = express()
 app.use(cors())
