@@ -2,7 +2,6 @@
 const express = require('express')
 const cors = require('cors')
 
-//const routeRoot = require('./api/routes/index')
 const routeUsers = require('./api/routes/usersRoutes')
 const routeFuncionarios = require('./api/routes/funcionariosRoutes')
 const routeEmpresas = require('./api/routes/empresasRoutes')
@@ -10,11 +9,10 @@ const routeEmpresas = require('./api/routes/empresasRoutes')
 require('./database/indexDB')
 
 const app = express()
-app.use(cors())
 
+app.use(cors())
 app.use(express.json())
 
-//app.use(routeRoot)
 app.use(routeUsers)
 app.use(routeFuncionarios)
 app.use(routeEmpresas)
@@ -23,7 +21,7 @@ app.listen(3000, function() {
     console.log('Rodando na porta 3000')
 })
 
-
+module.exports = app
 
 
 // ou

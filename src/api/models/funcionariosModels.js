@@ -1,15 +1,31 @@
 const {Model, DataTypes} = require('sequelize')
+const bcrypt = require('bcryptjs')
 
 class Funcionarios extends Model{
     static init(sequelize){
         super.init({
-            emp_nome: DataTypes.STRING, 
-            emp_contato: DataTypes.STRING, 
-            emp_email: DataTypes.STRING,
-            empresa_id: DataTypes.INTEGER
+            fun_nome: DataTypes.STRING, 
+            fun_password: DataTypes.STRING, 
+            fun_email: DataTypes.STRING,
+            empresa_id: DataTypes.INTEGER,
+            fun_sexo: DataTypes.STRING,
+            fun_logado: DataTypes.STRING,
+            fun_senha: DataTypes.STRING
         },{
             sequelize,
-            tableName: 'funcionarios'
+            tableName: 'funcionarios',
+
+            hooks: {
+                beforeCreate: (funcionarios) => {
+                    console.log('Executando............. BeforeCreate')
+                    const salt = bcrypt.genSaltSync()
+                    funcionario.fun_senha = bcrypt.hashSync(funcionario.fun_senha, salt)
+                    console.log(funcionario.fun_senha)
+                },
+                afterCreate: (funcionarios) => {
+                    console.log('Executando.......... AfterCreate')
+                }
+            }
         })
         return this
 

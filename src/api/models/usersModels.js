@@ -8,9 +8,14 @@ class Users extends Model {
             usr_password: DataTypes.STRING
         },{
             sequelize,
-            tableName: 'users'
+            tableName: 'usuarios'
         })
         return this
+    }
+
+    static associate(models){
+        this.hasMany(models.Enderecos,
+        {foreignKey: 'usuarios_id', as: 'usuarios'})
     }
 }
 
