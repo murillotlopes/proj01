@@ -5,7 +5,6 @@ const conexao = new Sequelize(dbConfig)
 
 const empresas = require('../api/models/empresasModels')
 const funcionarios = require('../api/models/funcionariosModels')
-const users = require('../api/models/usersModels')
 
 try{
     conexao.authenticate()
@@ -17,7 +16,6 @@ try{
 
 empresas.init(conexao)
 funcionarios.init(conexao)
-users.init(conexao)
 
 empresas.associate(conexao.models)
 funcionarios.associate(conexao.models)

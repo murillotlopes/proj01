@@ -10,7 +10,7 @@ module.exports = {
             type: Sequelize.DataTypes.STRING(1)
           },
           'fun_senha', {
-            type: Sequelize.DataTypes.STRING()
+            type: Sequelize.DataTypes.STRING
           }, {transaction: t}
         ),
       ])

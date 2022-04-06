@@ -10,7 +10,7 @@ module.exports = {
     async create(req, res) {
         const {emp_nome, emp_contato, emp_email} = req.body
 
-        const empresa = await Empresas.create(emp_nome, emp_contato, emp_email)
+        const empresa = await Empresas.create({emp_nome, emp_contato, emp_email})
 
         return res.status(200).send({
             status: 1,

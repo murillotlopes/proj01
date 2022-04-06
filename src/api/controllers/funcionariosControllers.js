@@ -19,7 +19,7 @@ module.exports = {
 
         const funcionario = await Empresas.findByPk(
             empresa_id, {
-                include: { association: 'empresa'}
+                include: { association: 'empresas'}
             }
         )
 
@@ -28,7 +28,8 @@ module.exports = {
 
     async create(req, res){
         const { empresa_id } = req.params
-        const {fun_nome, fun_password, emp_email, fun_senha} = req.body
+        const { fun_nome, fun_email, fun_password, 
+                fun_sexo, fun_logado, fun_senha } = req.body
 
         console.log('Parametros esperado: ' + empresa_id)
         console.log('Dados: ' + req.body)
@@ -39,7 +40,15 @@ module.exports = {
             return res.status(400).json({error: 'empresa não encontrada'})
         }
 
-        const funcionario = await Funcionarios.create(fun_nome, fun_password, emp_email, empresa_id, fun_senha)
+        const funcionario = await Funcionarios.create({
+            fun_nome,
+            fun_email,
+            fun_password,
+            empresa_id,
+            fun_sexo,
+            fun_logado,
+            fun_senha,
+        })
 
         return res.status(200).send({
             status: 1,
@@ -53,17 +62,21 @@ module.exports = {
         const {fun_nome, fun_password, emp_email, fun_sexo} = req.body
 
         await Funcionarios.update({
-            fun_nome, fun_password, emp_email, fun_sexo
-        })
+            fun_nome, fun_email, fun_password, fun_sexo 
+        }, {
+            where: { id: funcionario_id }
+        });
 
         return res.status(200).send({
             status: 1,
-            message: 'funcionario atualizado'
+            message: "Funcionário atualizado com sucesso!"
         })
     },
 
     async delete(req, res) {
         const { id } = req.params
+
+        const funcionario = await 
 
         await Funcionarios.destroy({
             where: {

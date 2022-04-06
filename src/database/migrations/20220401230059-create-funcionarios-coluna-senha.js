@@ -7,7 +7,7 @@ module.exports = {
         queryInterface.addColumn(
           'funcionarios',
           'fun_senha', {
-            type: Sequelize.DataTypes.STRING()
+            type: Sequelize.DataTypes.STRING
           }, {transaction: t}
         ),
       ])
