@@ -19,7 +19,7 @@ module.exports = {
 
         const funcionario = await Empresas.findByPk(
             empresa_id, {
-                include: { association: 'empresas'}
+                include: { association: 'empresa'}
             }
         )
 

@@ -32,7 +32,7 @@ class Funcionarios extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Empresas, {foreignKey: "empresa_id", as: "empresas"})
+        this.belongsTo(models.Empresas, {foreignKey: "empresa_id", as: "empresa"})
     }
 }
 
