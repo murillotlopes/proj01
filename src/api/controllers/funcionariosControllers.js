@@ -1,5 +1,7 @@
 const Funcionarios = require('../models/funcionariosModels')
 const Empresas = require('../models/empresasModels')
+const bcrypt = require('bcryptjs/dist/bcrypt')
+const jwt = require('jsonwebtoken')
 
 module.exports = {
     async indexAll(req, res) {
@@ -87,6 +89,56 @@ module.exports = {
         return res.status(200).send({
             status: 1,
             message: 'funcionario deletado'
+        })
+    },
+
+    async login(req, res) {
+        const {fun_senha, fun_email, fun_logado} = req.body
+
+        const funcionario = await Funcionarios.findOne({ where: {fun_email}})
+
+        if (!funcionario) {
+            return res.status(400).send({
+                status: 0,
+                message: 'e-mail ou senha incorretos!'
+            })
+        }
+
+        if(!bcrypt.compareSync(fun_senha, funcionario.fun_senha)){
+            return res.status(400).send({
+                status: 0,
+                message: 'senha ou e-mail incorretos!'
+            })
+        } else {
+            console.log('Dados conferem!')
+        }
+
+        const funcionario_id = funcionario.id
+        funcionario.fun_logado = '1'
+
+        await Funcionarios.update({
+            fun_logado
+        }, {
+            where: {
+                id: funcionario_id
+            }
+        })
+
+        const token = jwt.sign({
+            codigo: funcionario.id,
+            nome: funcionario.fun_nome,
+            email: funcionario.fun_email
+        }, 
+            'minhaChaveSecreta',{
+                expiresIn: 30
+            }
+        )
+
+        return res.status(200).send({
+            status: 1,
+            message: 'usuário logado com sucesso',
+            funcionario,
+            token
         })
     }
 }
