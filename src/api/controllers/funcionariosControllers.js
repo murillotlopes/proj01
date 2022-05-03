@@ -2,6 +2,7 @@ const Funcionarios = require('../models/funcionariosModels')
 const Empresas = require('../models/empresasModels')
 const bcrypt = require('bcryptjs/dist/bcrypt')
 const jwt = require('jsonwebtoken')
+require('dotenv/config')
 
 module.exports = {
     async indexAll(req, res) {
@@ -124,13 +125,16 @@ module.exports = {
             }
         })
 
+        secretKey = process.env.JWT_KEY
+        expTemp = process.env.JWT_EXP
+
         const token = jwt.sign({
             codigo: funcionario.id,
             nome: funcionario.fun_nome,
             email: funcionario.fun_email
         }, 
-            'minhaChaveSecreta',{
-                expiresIn: 30
+            secretKey ,{
+                expiresIn: expTemp
             }
         )
 
